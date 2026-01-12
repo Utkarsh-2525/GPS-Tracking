@@ -29,4 +29,13 @@ public class AuthController {
         }
         return jwt.generateToken(user.getEmail());
     }
+
+    @PostMapping("/register")
+    public String register(@RequestBody LoginRequest req) {
+        User user = new User();
+        user.setEmail(req.email());
+        user.setPassword(req.password());
+        repo.save(user);
+        return "User registered";
+    }
 }
